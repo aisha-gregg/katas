@@ -37,9 +37,9 @@ describe('function clock', () => {
   })
 
   it('should take a time in seconds that is over 1 hour and 10 mintues and return it in the following format hh:mm:ss', () => {
-    const given = 4260
+    const given = 4200
 
     const actual = clock(given)
-    expect(actual).toBe('01:01:00')
+    expect(actual).toBe('01:10:00')
   })
 })

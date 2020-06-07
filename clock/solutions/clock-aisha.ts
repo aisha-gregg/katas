@@ -31,5 +31,16 @@ export function clock(seconds: number): string {
       formatSeconds = `0${calculateHours}:0${calculateMinutes}:${calculateSeconds}0`
     }
   }
+
+  if (seconds >= 4200) {
+    let calculateMinutes = Math.floor(seconds / 60)
+    if (calculateMinutes >= 60) {
+      const calculateHours = Math.floor(calculateMinutes / 60)
+      calculateMinutes = calculateHours % 60
+      const calculateSeconds = seconds % 60
+
+      formatSeconds = `0${calculateHours}:${calculateMinutes}0:${calculateSeconds}0`
+    }
+  }
   return formatSeconds
 }
