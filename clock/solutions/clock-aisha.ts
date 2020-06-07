@@ -1,46 +1,24 @@
 export function clock(seconds: number): string {
-  let formatSeconds = `00:00:${seconds}`
-  if (seconds > 60 && seconds < 600) {
-    const calculateMinutes = Math.floor(seconds / 60)
-    const calculateSeconds = seconds % 60
-    formatSeconds = `00:0${calculateMinutes}:${calculateSeconds}`
-  }
-  if (seconds >= 600) {
-    const calculateMinutes = Math.floor(seconds / 60)
-    const calculateSeconds = seconds % 60
-    formatSeconds = `00:${calculateMinutes}:${calculateSeconds}0`
-  }
-  if (seconds === 3600) {
-    const calculateMinutes = Math.floor(seconds / 60)
-    if (calculateMinutes >= 60) {
-      const calculateHours = Math.floor(calculateMinutes / 60)
-
-      const calculateSeconds = seconds % 60
-
-      formatSeconds = `0${calculateHours}:00:${calculateSeconds}0`
-    }
+  const secondsInAnHour = 3_600
+  const secondsInAMinute = 60
+  let newSeconds = 0
+  let newMinutes = 0
+  let newHours = 0
+  if (seconds >= secondsInAnHour) {
+    newHours = Math.floor(seconds / secondsInAnHour)
+    seconds = seconds % secondsInAnHour
   }
 
-  if (seconds > 3600) {
-    let calculateMinutes = Math.floor(seconds / 60)
-    if (calculateMinutes >= 60) {
-      const calculateHours = Math.floor(calculateMinutes / 60)
-      calculateMinutes = calculateHours % 60
-      const calculateSeconds = seconds % 60
-
-      formatSeconds = `0${calculateHours}:0${calculateMinutes}:${calculateSeconds}0`
-    }
+  if (seconds >= secondsInAMinute) {
+    newMinutes = Math.floor(seconds / secondsInAMinute)
+    seconds = seconds % secondsInAMinute
   }
 
-  if (seconds >= 4200) {
-    let calculateMinutes = Math.floor(seconds / 60)
-    if (calculateMinutes >= 60) {
-      const calculateHours = Math.floor(calculateMinutes / 60)
-      calculateMinutes = calculateHours % 60
-      const calculateSeconds = seconds % 60
-
-      formatSeconds = `0${calculateHours}:${calculateMinutes}0:${calculateSeconds}0`
-    }
+  if (seconds < secondsInAMinute) {
+    newSeconds = seconds
   }
-  return formatSeconds
+
+  const padLeft = (time: number) => (time < 10 ? '0' + time : time)
+
+  return `${padLeft(newHours)}:${padLeft(newMinutes)}:${padLeft(newSeconds)}`
 }
