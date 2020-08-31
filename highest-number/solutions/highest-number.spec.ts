@@ -1,19 +1,9 @@
-import { getHighestNumber } from './highest-number'
+import { highestNumber } from './highest-number'
+describe('highest number', () => {
+  it('should return the highest number in an array', () => {
+    const given = [40, 2, 34, 7, 8, 90]
 
-describe('getHighestNumber', () => {
-  it('should get the highest number given an array of one number', () => {
-    const given = [42]
-
-    const actual = getHighestNumber(given)
-
-    expect(actual).toBe(42)
-  })
-
-  it('should get the highest number given an array of several numbers', () => {
-    const given = [1, 3, 2]
-
-    const actual = getHighestNumber(given)
-
-    expect(actual).toBe(3)
+    const actual = highestNumber(given)
+    expect(actual).toBe(90)
   })
 })
